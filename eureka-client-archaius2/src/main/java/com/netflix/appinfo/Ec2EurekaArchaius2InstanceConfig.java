@@ -13,18 +13,16 @@ import com.netflix.archaius.api.Config;
 
 /**
  * When running in EC2 add the following override binding.
- * 
- * 	bind(EurekaInstanceConfig.class).to(KaryonEc2EurekaInstanceConfig.class);
- * 
- * 
- * @author elandau
+ * <p>
+ * bind(EurekaInstanceConfig.class).to(KaryonEc2EurekaInstanceConfig.class);
  *
+ * @author elandau
  */
 @Singleton
 public class Ec2EurekaArchaius2InstanceConfig extends EurekaArchaius2InstanceConfig implements RefreshableInstanceConfig {
     private static final Logger LOG = LoggerFactory.getLogger(Ec2EurekaArchaius2InstanceConfig.class);
 
-    private static final String[] DEFAULT_AWS_ADDRESS_RESOLUTION_ORDER = new String[] {
+    private static final String[] DEFAULT_AWS_ADDRESS_RESOLUTION_ORDER = new String[]{
             MetaDataKey.publicHostname.name(),
             MetaDataKey.localIpv4.name()
     };
@@ -77,11 +75,11 @@ public class Ec2EurekaArchaius2InstanceConfig extends EurekaArchaius2InstanceCon
             this.amazonInfoHolder = new RefreshableAmazonInfoProvider(initialInfo, amazonInfoConfig);
         }
     }
-    
+
     @Override
     public String getHostName(boolean refresh) {
         if (refresh && this.amazonInfoHolder instanceof RefreshableAmazonInfoProvider) {
-            ((RefreshableAmazonInfoProvider)amazonInfoHolder).refresh();
+            ((RefreshableAmazonInfoProvider) amazonInfoHolder).refresh();
         }
         return amazonInfoHolder.get().get(MetaDataKey.publicHostname);
     }
@@ -99,14 +97,14 @@ public class Ec2EurekaArchaius2InstanceConfig extends EurekaArchaius2InstanceCon
 
     /**
      * @deprecated 2016-09-07
-     *
+     * <p>
      * Refresh instance info - currently only used when in AWS cloud
      * as a public ip can change whenever an EIP is associated or dissociated.
      */
     @Deprecated
     public synchronized void refreshAmazonInfo() {
         if (this.amazonInfoHolder instanceof RefreshableAmazonInfoProvider) {
-            ((RefreshableAmazonInfoProvider)amazonInfoHolder).refresh();
+            ((RefreshableAmazonInfoProvider) amazonInfoHolder).refresh();
         }
     }
 

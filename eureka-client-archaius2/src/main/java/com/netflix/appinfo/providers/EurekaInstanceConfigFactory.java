@@ -4,7 +4,7 @@ import com.netflix.appinfo.EurekaInstanceConfig;
 
 /**
  * An equivalent {@link javax.inject.Provider} interface for {@link com.netflix.appinfo.EurekaInstanceConfig}.
- *
+ * <p>
  * Why define this {@link com.netflix.appinfo.providers.EurekaInstanceConfigFactory} instead
  * of using {@link javax.inject.Provider} instead? Provider does not work due to the fact that
  * Guice treats Providers specially.
@@ -12,7 +12,7 @@ import com.netflix.appinfo.EurekaInstanceConfig;
  * @author David Liu
  */
 public interface EurekaInstanceConfigFactory {
-    
+
     EurekaInstanceConfig get();
 
 }

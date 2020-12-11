@@ -18,24 +18,24 @@ import com.netflix.discovery.shared.transport.jersey.EurekaJerseyClient;
 import com.netflix.discovery.shared.transport.jersey.TransportClientFactories;
 
 public class Jersey2TransportClientFactories implements TransportClientFactories<ClientRequestFilter> {
-    
+
     private static final Jersey2TransportClientFactories INSTANCE = new Jersey2TransportClientFactories();
-    
+
     public static Jersey2TransportClientFactories getInstance() {
         return INSTANCE;
     }
 
     @Override
     public TransportClientFactory newTransportClientFactory(final EurekaClientConfig clientConfig,
-                                                                   final Collection<ClientRequestFilter> additionalFilters,
-                                                                   final InstanceInfo myInstanceInfo) {
+                                                            final Collection<ClientRequestFilter> additionalFilters,
+                                                            final InstanceInfo myInstanceInfo) {
         return newTransportClientFactory(clientConfig, additionalFilters, myInstanceInfo, Optional.empty(), Optional.empty());
     }
-    
+
     @Override
     public TransportClientFactory newTransportClientFactory(EurekaClientConfig clientConfig,
-            Collection<ClientRequestFilter> additionalFilters, InstanceInfo myInstanceInfo,
-            Optional<SSLContext> sslContext, Optional<HostnameVerifier> hostnameVerifier) {
+                                                            Collection<ClientRequestFilter> additionalFilters, InstanceInfo myInstanceInfo,
+                                                            Optional<SSLContext> sslContext, Optional<HostnameVerifier> hostnameVerifier) {
         final TransportClientFactory jerseyFactory = Jersey2ApplicationClientFactory.create(
                 clientConfig,
                 additionalFilters,
@@ -62,7 +62,7 @@ public class Jersey2TransportClientFactories implements TransportClientFactories
 
     @Override
     public TransportClientFactory newTransportClientFactory(Collection<ClientRequestFilter> additionalFilters,
-            EurekaJerseyClient providedJerseyClient) {
+                                                            EurekaJerseyClient providedJerseyClient) {
         throw new UnsupportedOperationException();
     }
 
